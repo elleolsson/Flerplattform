@@ -2,7 +2,7 @@ import './FavouriteItem.css'
 
 export default function FavouriteItem({ name, onDelete, handleClick }) {
     return (
-        <li className="favourite-item" onClick={() => handleClick(name)}>
+        <li className="favourite-item" onClick={handleClick}>
             <p className="favourite-item-name">{name}</p>
             <button
                 type="button"

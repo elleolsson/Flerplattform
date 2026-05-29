@@ -4,13 +4,7 @@ import Modal from 'react-bootstrap/Modal'
 import MapModal from '../MapModal/MapModal'
 import './RestaurantCard.css'
 
-export default function FavouriteRestaurantCard({
-    show,
-    onHide,
-    name,
-    imageSrc,
-    mapLink,
-}) {
+export default function FavouriteRestaurantCard({ show, onHide, name, imageSrc, mapLink }) {
     const [showMap, setShowMap] = useState(false)
 
     return (

@@ -6,7 +6,7 @@ import './RestaurantCard.css'
 
 const STORAGE_KEY = 'restaurantReactions'
 
-const saveReaction = (name, reaction) => {
+const saveReaction = (name, reaction, imageSrc, mapLink) => {
     if (!name || !reaction) {
         return
     }
@@ -16,10 +16,12 @@ const saveReaction = (name, reaction) => {
     const next = Array.isArray(parsed) ? parsed : []
     const existingIndex = next.findIndex((item) => item?.name === name)
 
+    const payload = { name, reaction, imageSrc, mapLink }
+
     if (existingIndex >= 0) {
-        next[existingIndex] = { name, reaction }
+        next[existingIndex] = payload
     } else {
-        next.push({ name, reaction })
+        next.push(payload)
     }
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
@@ -29,7 +31,8 @@ export default function RestaurantCard({ name, imageSrc, mapLink }) {
     const [showMap, setShowMap] = useState(false)
 
     const handleReaction = (reaction) => {
-        saveReaction(name, reaction)
+        if (reaction === "like") saveReaction(name, reaction, imageSrc, mapLink);
+        else saveReaction(name, reaction);
     }
 
     return (

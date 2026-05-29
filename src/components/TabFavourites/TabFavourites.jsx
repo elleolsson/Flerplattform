@@ -1,6 +1,6 @@
 import RestaurantCard from '../RestaurantCard/RestaurantCard'
 import Category from '../Category/Category'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './TabFavourites.css'
 import FavouriteRestaurantCard from '../RestaurantCard/FavouriteRestaurantCard';
 import FavouriteItem from '../FavouriteItem/FavouriteItem';
@@ -18,6 +18,7 @@ export default function TabFavourites() {
     const [modalName, setModalName] = useState("");
     const [modalImgSrc, setModalImgSrc] = useState("");
     const [modalMapLink, setModalMapLink] = useState("");
+    const [favourites, setFavourites] = useState([])
 
     const unLike = (restaurantName) => {
         const stored = localStorage.getItem(STORAGE_KEY)
@@ -27,16 +28,28 @@ export default function TabFavourites() {
             : []
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+        setFavourites((current) => current.filter((item) => item?.name !== restaurantName))
     }
 
-    const handleClick = (name) => {
-        console.log("clicked fav")
+    const handleClick = (name, imageSrc, mapLink) => {
         setModalName(name);
-        setModalImgSrc("https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80");
-        setModalMapLink("https://www.google.com/maps/embed?pb=...");
+        setModalImgSrc(imageSrc);
+        setModalMapLink(mapLink);
         setShowModal(true);
 
     }
+
+    useEffect(() => {
+        const stored = localStorage.getItem(STORAGE_KEY)
+        const parsed = stored ? JSON.parse(stored) : []
+        const liked = Array.isArray(parsed)
+            ? parsed.filter((item) => item?.reaction === 'like')
+            : []
+
+        setFavourites(liked)
+    }, [])
+
+    //On load, populate the ul with FavouriteItem-components from localStorage
 
     return (
         <>
@@ -50,8 +63,13 @@ export default function TabFavourites() {
             </div>
             <div className="restuarant-card">
                 <ul className="favourites-list">
-                    {/* Endast exempel, ta bort... */}
-                    <FavouriteItem name="Saffron Bistro" onDelete={() => unLike("Saffron Bistro")} handleClick={handleClick} />
+                    {favourites.map((item) => (
+                        <FavouriteItem
+                            name={item.name}
+                            handleClick={() => handleClick(item.name, item.imageSrc, item.mapLink)}
+                            onDelete={() => unLike(item.name)}
+                        />
+                    ))}
                 </ul>
                 <FavouriteRestaurantCard
                     show={showModal}
