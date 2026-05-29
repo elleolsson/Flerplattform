@@ -1,0 +1,13 @@
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, auto);
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.favourites-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 12px 0;
+}

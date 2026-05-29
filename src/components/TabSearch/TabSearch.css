@@ -14,7 +14,7 @@
     margin-top: 5px;
 }
 
-.restaurant-card-slot {
+.restaurant-cards {
     flex: 1;
     min-height: 0;
 }

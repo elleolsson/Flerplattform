@@ -1,7 +1,16 @@
-export default function FavouriteItem() {
-    return (
-        <>
+import './FavouriteItem.css'
 
-        </>
+export default function FavouriteItem({ name, onDelete, handleClick }) {
+    return (
+        <li className="favourite-item" onClick={() => handleClick(name)}>
+            <p className="favourite-item-name">{name}</p>
+            <button
+                type="button"
+                className="favourite-item-delete"
+                onClick={onDelete}
+            >
+                ❌
+            </button>
+        </li>
     )
 }
