@@ -4,38 +4,37 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import MapModal from '../MapModal/MapModal'
 import './RestaurantCard.css'
 
-export default function RestaurantCard({
-    name,
-    imageSrc,
-    mapLink,
-    onReaction,
-    closeable = false,
-}) {
-    const [showMap, setShowMap] = useState(false)
-    const [isVisible, setIsVisible] = useState(true)
+const STORAGE_KEY = 'restaurantReactions'
 
-    if (!isVisible) {
-        return null
+const saveReaction = (name, reaction) => {
+    if (!name || !reaction) {
+        return
     }
 
+    const stored = localStorage.getItem(STORAGE_KEY)
+    const parsed = stored ? JSON.parse(stored) : []
+    const next = Array.isArray(parsed) ? parsed : []
+    const existingIndex = next.findIndex((item) => item?.name === name)
+
+    if (existingIndex >= 0) {
+        next[existingIndex] = { name, reaction }
+    } else {
+        next.push({ name, reaction })
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+}
+
+export default function RestaurantCard({ name, imageSrc, mapLink }) {
+    const [showMap, setShowMap] = useState(false)
+
     const handleReaction = (reaction) => {
-        if (typeof onReaction === 'function') {
-            onReaction(reaction)
-        }
+        saveReaction(name, reaction)
     }
 
     return (
         <div className="restaurant-card">
-            {closeable && (
-                <button
-                    type="button"
-                    className="restaurant-card-close"
-                    aria-label="Close restaurant card"
-                    onClick={() => setIsVisible(false)}
-                >
-                    ✖️
-                </button>
-            )}
+
             <h3 className="restaurant-card-name">{name}</h3>
             <div className="restaurant-card-media">
                 <div className="restaurant-card-image">
