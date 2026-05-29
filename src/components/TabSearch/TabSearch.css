@@ -1,7 +1,20 @@
+.tab-search {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+}
+
 .category-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: repeat(2, auto);
     gap: 10px;
     margin-top: 5px;
+}
+
+.restaurant-card-slot {
+    flex: 1;
+    min-height: 0;
 }
