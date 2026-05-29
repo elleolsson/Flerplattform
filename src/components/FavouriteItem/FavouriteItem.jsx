@@ -7,7 +7,10 @@ export default function FavouriteItem({ name, onDelete, handleClick }) {
             <button
                 type="button"
                 className="favourite-item-delete"
-                onClick={onDelete}
+                onClick={(event) => {
+                    event.stopPropagation()
+                    onDelete?.()
+                }}
             >
                 ❌
             </button>
