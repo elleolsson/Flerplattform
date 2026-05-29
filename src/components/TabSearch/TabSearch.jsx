@@ -26,7 +26,7 @@ export default function TabSearch() {
                 <Category name="Oriental" toggled={toggleOriental} toggler={setToggleOriental} />
             </div>
             <div className="restuarant-card">
-
+                <h1>Restaurant card here...</h1>
             </div>
         </>
     )
