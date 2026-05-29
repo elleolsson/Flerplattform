@@ -1,0 +1,21 @@
+.search-radius {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+.search-radius>* {
+    margin: 0;
+}
+
+.search-radius label {
+    white-space: nowrap;
+}
+
+.search-radius input {
+    flex: 1;
+}

@@ -11,7 +11,7 @@ export default function TabSearch() {
             <SearchLocation />
             <SearchRadius />
             <div className="category-grid">
-
+                <h1>TabSearch</h1>
             </div>
             <div className="restuarant-card">
 

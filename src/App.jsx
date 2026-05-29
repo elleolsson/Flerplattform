@@ -7,14 +7,18 @@ import { Button } from 'react-bootstrap'
 import './App.css'
 
 function App() {
+    const [searchTab, setSearchTab] = useState(true)
+    const searchVariant = searchTab ? 'info' : 'outline-info'
+    const favouritesVariant = searchTab ? 'outline-info' : 'info'
     return (
         <div className="app-shell">
             <div className="container">
                 <div className="tabs">
-                    <Button variant='info'>Sök</Button>
-                    <Button variant='outline-info'>Favoriter</Button>
+                    <Button variant={searchVariant} onClick={() => setSearchTab(true)}>Sök</Button>
+                    <Button variant={favouritesVariant} onClick={() => setSearchTab(false)}>Favoriter</Button>
                 </div>
             </div>
+            {searchTab ? <TabSearch /> : <TabFavourites />}
         </div>
     )
 }
