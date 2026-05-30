@@ -21,7 +21,12 @@ export default function RestaurantCard({
     return (
         <div className="restaurant-card">
 
-            <h3 className="restaurant-card-name">{name}</h3>
+            <div className="restaurant-card-header">
+                <h3 className="restaurant-card-name">{name}</h3>
+                {distanceText && (
+                    <span className="restaurant-card-distance">{distanceText}</span>
+                )}
+            </div>
             <div className="restaurant-card-media">
                 <div className="restaurant-card-image">
                     {imageSrc ? (
@@ -30,14 +35,19 @@ export default function RestaurantCard({
                         <div className="restaurant-card-placeholder">No image</div>
                     )}
                 </div>
-                <Button
-                    className="restaurant-card-map"
-                    variant="secondary"
-                    onClick={() => setShowMap(true)}
-                    disabled={!mapLink} //Om ingen map-lank skickades bland params
-                >
-                    Open map
-                </Button>
+                <div className="restaurant-card-map-row">
+                    <Button
+                        className="restaurant-card-map"
+                        variant="secondary"
+                        onClick={() => setShowMap(true)}
+                        disabled={!mapLink} //Om ingen map-lank skickades bland params
+                    >
+                        Open map
+                    </Button>
+                    {timeText && (
+                        <span className="restaurant-card-time">{timeText}</span>
+                    )}
+                </div>
             </div>
             <ButtonGroup className="restaurant-card-reactions">
                 <Button variant="outline-success" onClick={() => handleReaction('like')}>
