@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react'
 import './TabFavourites.css'
 import FavouriteRestaurantCard from '../RestaurantCard/FavouriteRestaurantCard';
 import FavouriteItem from '../FavouriteItem/FavouriteItem';
-
-const STORAGE_KEY = 'restaurantReactions'
+import { getLikedReactions, removeReaction } from '../util'
 
 export default function TabFavourites() {
     const [toggleHusman, setToggleHusman] = useState(false);
@@ -21,13 +20,7 @@ export default function TabFavourites() {
     const [favourites, setFavourites] = useState([])
 
     const unLike = (restaurantName) => {
-        const stored = localStorage.getItem(STORAGE_KEY)
-        const parsed = stored ? JSON.parse(stored) : []
-        const next = Array.isArray(parsed)
-            ? parsed.filter((item) => item?.name !== restaurantName)
-            : []
-
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+        removeReaction(restaurantName)
         setFavourites((current) => current.filter((item) => item?.name !== restaurantName))
     }
 
@@ -40,13 +33,7 @@ export default function TabFavourites() {
     }
 
     useEffect(() => {
-        const stored = localStorage.getItem(STORAGE_KEY)
-        const parsed = stored ? JSON.parse(stored) : []
-        const liked = Array.isArray(parsed)
-            ? parsed.filter((item) => item?.reaction === 'like')
-            : []
-
-        setFavourites(liked)
+        setFavourites(getLikedReactions())
     }, [])
 
     //On load, populate the ul with FavouriteItem-components from localStorage

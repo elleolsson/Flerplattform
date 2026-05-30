@@ -2,37 +2,20 @@ import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import MapModal from '../MapModal/MapModal'
+import { saveReaction } from '../util'
 import './RestaurantCard.css'
 
-const STORAGE_KEY = 'restaurantReactions'
-
-const saveReaction = (name, reaction, imageSrc, mapLink) => {
-    if (!name || !reaction) {
-        return
-    }
-
-    const stored = localStorage.getItem(STORAGE_KEY)
-    const parsed = stored ? JSON.parse(stored) : []
-    const next = Array.isArray(parsed) ? parsed : []
-    const existingIndex = next.findIndex((item) => item?.name === name)
-
-    const payload = { name, reaction, imageSrc, mapLink }
-
-    if (existingIndex >= 0) {
-        next[existingIndex] = payload
-    } else {
-        next.push(payload)
-    }
-
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
-}
-
-export default function RestaurantCard({ name, imageSrc, mapLink }) {
+export default function RestaurantCard({
+    name,
+    imageSrc,
+    mapLink,
+    distanceText,
+    timeText,
+}) {
     const [showMap, setShowMap] = useState(false)
 
     const handleReaction = (reaction) => {
-        if (reaction === "like") saveReaction(name, reaction, imageSrc, mapLink);
-        else saveReaction(name, reaction);
+        saveReaction({ name, reaction, imageSrc, mapLink })
     }
 
     return (
