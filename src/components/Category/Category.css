@@ -1,0 +1,8 @@
+.no-hover:hover,
+.no-hover:focus,
+.no-hover:active {
+    background-color: var(--bs-btn-bg);
+    border-color: var(--bs-btn-border-color);
+    color: var(--bs-btn-color);
+    box-shadow: none;
+}
