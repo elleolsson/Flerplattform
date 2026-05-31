@@ -52,6 +52,7 @@ export default function TabFavourites() {
                 <ul className="favourites-list">
                     {favourites.map((item) => (
                         <FavouriteItem
+                            key={item.name}
                             name={item.name}
                             handleClick={() => handleClick(item.name, item.imageSrc, item.mapLink)}
                             onDelete={() => unLike(item.name)}
