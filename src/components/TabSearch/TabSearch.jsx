@@ -3,6 +3,7 @@ import SearchRadius from '../SearchRadius/SearchRadius'
 import RestaurantCard from '../RestaurantCard/RestaurantCard'
 import Category from '../Category/Category'
 import { useState } from 'react'
+import { Button } from "react-bootstrap";
 import './TabSearch.css'
 
 export default function TabSearch() {
@@ -25,6 +26,7 @@ export default function TabSearch() {
                 <Category name="Latin" toggled={toggleLatin} toggler={setToggleLatin} />
                 <Category name="Oriental" toggled={toggleOriental} toggler={setToggleOriental} />
             </div>
+            <Button variant='info'>SÖK</Button>
             <div className="restaurant-cards">
                 {/* Endast exempel, ta bort... */}
                 <RestaurantCard
