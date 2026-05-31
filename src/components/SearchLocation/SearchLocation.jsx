@@ -2,7 +2,7 @@ import { Alert, Button } from "react-bootstrap";
 import './SearchLocation.css';
 import { useState } from "react";
 
-export default function SearchLocation() {
+export default function SearchLocation({setCoords}) {
 
     //Funktion som händer varje gång en ändring hädner i adressens fält. (ska användas till mer grejer framöver).
     const addrInputChange = ()=>{
@@ -22,9 +22,11 @@ export default function SearchLocation() {
         function success(position){
             //Hämtar datorn/mobilens plats. (ska skickas till tabsearch sen)
             const cord = position.coords;
+            setCoords(cord); //Settar det man får av geolocation. 
+            
             const lat = cord.latitude; //Ska ges till api 
             const long = cord.longitude; //-II-
-
+            
             console.log("lat: " + lat + "long: " + long);
             
         }

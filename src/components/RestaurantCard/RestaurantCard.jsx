@@ -9,6 +9,7 @@ export default function RestaurantCard({
     name,
     imageSrc,
     mapLink,
+    mapLinkUri,
     distanceText,
     timeText,
 }) {
@@ -61,6 +62,7 @@ export default function RestaurantCard({
                 show={showMap}
                 onHide={() => setShowMap(false)}
                 mapLink={mapLink}
+                mapLinkUri={mapLinkUri}
                 name={name}
             />
         </div>

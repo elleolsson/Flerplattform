@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-export default function MapModal({ show, onHide, mapLink, name }) {
+export default function MapModal({ show, onHide, mapLink,mapLinkUri, name }) {
     const title = name ? `${name} map` : 'Map'
 
     return (
@@ -27,7 +27,7 @@ export default function MapModal({ show, onHide, mapLink, name }) {
                     Close
                 </Button>
                 {mapLink && (
-                    <Button as="a" href={mapLink} target="_blank" rel="noreferrer">
+                    <Button as="a" href={mapLinkUri} target="_blank" rel="noreferrer">
                         Open in maps
                     </Button>
                 )}
