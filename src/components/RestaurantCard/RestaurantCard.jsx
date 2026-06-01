@@ -12,11 +12,15 @@ export default function RestaurantCard({
     mapLinkUri,
     distanceText,
     timeText,
+    onReaction,
 }) {
     const [showMap, setShowMap] = useState(false)
 
     const handleReaction = (reaction) => {
         saveReaction({ name, reaction, imageSrc, mapLink })
+        if (typeof onReaction === 'function') {
+            onReaction(reaction)
+        }
     }
 
     return (
