@@ -9,13 +9,19 @@ export default function RestaurantCard({
     name,
     imageSrc,
     mapLink,
+    mapLinkUri,
     distanceText,
     timeText,
+    onReaction,
+    category,
 }) {
     const [showMap, setShowMap] = useState(false)
 
     const handleReaction = (reaction) => {
-        saveReaction({ name, reaction, imageSrc, mapLink })
+        saveReaction({ name, reaction, imageSrc, mapLink, category })
+        if (typeof onReaction === 'function') {
+            onReaction(reaction)
+        }
     }
 
     return (
@@ -61,6 +67,7 @@ export default function RestaurantCard({
                 show={showMap}
                 onHide={() => setShowMap(false)}
                 mapLink={mapLink}
+                mapLinkUri={mapLinkUri}
                 name={name}
             />
         </div>

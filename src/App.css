@@ -4,8 +4,7 @@
     max-width: 500px;
     margin: 0px auto;
     padding: 30px 15px;
-    height: 100vh;
-    min-height: calc(100vh - 60px);
+    min-height: 100vh;
     background: #ffffff;
     border-radius: 20px;
     box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);

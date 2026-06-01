@@ -21,6 +21,7 @@ const writeJson = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value))
 }
 
+//I hela kilometer
 export const getSearchRadius = (defaultValue = 5) => {
     const savedValue = localStorage.getItem(STORAGE_KEYS.searchRadius)
     const parsedValue = Number(savedValue)
@@ -32,7 +33,7 @@ export const setSearchRadius = (value) => {
     localStorage.setItem(STORAGE_KEYS.searchRadius, String(value))
 }
 
-export const saveReaction = ({ name, reaction, imageSrc, mapLink }) => {
+export const saveReaction = ({ name, reaction, imageSrc, mapLink, category }) => {
     if (!name || !reaction) {
         return
     }
@@ -42,7 +43,7 @@ export const saveReaction = ({ name, reaction, imageSrc, mapLink }) => {
     const existingIndex = next.findIndex((item) => item?.name === name)
     const payload =
         reaction === 'like'
-            ? { name, reaction, imageSrc, mapLink }
+            ? { name, reaction, imageSrc, mapLink, category }
             : { name, reaction }
 
     if (existingIndex >= 0) {
@@ -69,5 +70,13 @@ export const getLikedReactions = () => {
 
     return Array.isArray(parsed)
         ? parsed.filter((item) => item?.reaction === 'like')
+        : []
+}
+
+export const getDislikedReactions = () => {
+    const parsed = readJson(STORAGE_KEYS.reactions, [])
+
+    return Array.isArray(parsed)
+        ? parsed.filter((item) => item?.reaction === 'dislike')
         : []
 }
