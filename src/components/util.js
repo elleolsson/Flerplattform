@@ -21,6 +21,7 @@ const writeJson = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value))
 }
 
+//I hela kilometer
 export const getSearchRadius = (defaultValue = 5) => {
     const savedValue = localStorage.getItem(STORAGE_KEYS.searchRadius)
     const parsedValue = Number(savedValue)

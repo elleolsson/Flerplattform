@@ -5,6 +5,7 @@ import Category from '../Category/Category'
 import { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import './TabSearch.css'
+import { getSearchRadius } from '../util.js'
 
 export default function TabSearch() {
     const [toggleHusman, setToggleHusman] = useState(false);
@@ -101,7 +102,7 @@ export default function TabSearch() {
                     "X-Goog-FieldMask": "places.displayName,places.photos,places.googleMapsUri,places.id,routingSummaries"
                 },
                 body: JSON.stringify({
-                    "maxResultCount": 2,
+                    "maxResultCount": 20,
                     "includedTypes": restaurantTypes,
                     "locationRestriction": { //Används för att begränsa området där man söker resturanger
                         "circle": {
@@ -109,7 +110,7 @@ export default function TabSearch() {
                                 "latitude": coords.latitude,//Variabel från latitude i geolocation
                                 "longitude": coords.longitude  //Variabel från longitude i geolocation
                             },
-                            "radius": 1000//Radie variabel från slidern ska va ggr 1000 för meter
+                            "radius": 1000 * getSearchRadius()
                         }
                     },
                     "routingParameters": {
