@@ -72,3 +72,11 @@ export const getLikedReactions = () => {
         ? parsed.filter((item) => item?.reaction === 'like')
         : []
 }
+
+export const getDislikedReactions = () => {
+    const parsed = readJson(STORAGE_KEYS.reactions, [])
+
+    return Array.isArray(parsed)
+        ? parsed.filter((item) => item?.reaction === 'dislike')
+        : []
+}

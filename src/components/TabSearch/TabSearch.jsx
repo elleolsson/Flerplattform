@@ -5,7 +5,7 @@ import Category from '../Category/Category'
 import { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import './TabSearch.css'
-import { getSearchRadius } from '../util.js'
+import { getDislikedReactions, getSearchRadius } from '../util.js'
 
 export default function TabSearch() {
     const [toggleHusman, setToggleHusman] = useState(false);
@@ -149,11 +149,17 @@ export default function TabSearch() {
             setCurrentIndex(0)
             const places = apiData.places || []
             const summaries = apiData.routingSummaries || []
+            const dislikedNames = new Set(
+                getDislikedReactions().map((item) => item?.name).filter(Boolean)
+            )
             const mergedResults = places.map((place, index) => ({
                 ...place,
                 routingSummary: summaries[index] || null,
             }))
-            setResults(mergedResults)
+            const filteredResults = mergedResults.filter(
+                (place) => !dislikedNames.has(place?.displayName?.text)
+            )
+            setResults(filteredResults)
 
         } catch (error) {
             window.alert("Kunde inte Nå google");
