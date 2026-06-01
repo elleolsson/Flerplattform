@@ -33,7 +33,7 @@ export default function TabSearch() {
             restaurantTypes.push("hamburger_restaurant");
         }
         if (toggleLatin) {
-            restaurantTypes.push("latin_american_restaurant");
+            restaurantTypes.push("bar");
         }
         if (toggleSpanish) {
             restaurantTypes.push("spanish_restaurant");
@@ -177,7 +177,7 @@ export default function TabSearch() {
                 <Category name="Pizza" toggled={togglePizza} toggler={setTogglePizza} />
                 <Category name="Hamburger" toggled={toggleHamburger} toggler={setToggleHamburger} />
                 <Category name="Asian" toggled={toggleAsian} toggler={setToggleAsian} />
-                <Category name="Latin" toggled={toggleLatin} toggler={setToggleLatin} />
+                <Category name="Pubs" toggled={toggleLatin} toggler={setToggleLatin} />
                 <Category name="Spanish" toggled={toggleSpanish} toggler={setToggleSpanish} />
             </div>
             <Button
