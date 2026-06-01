@@ -13,11 +13,12 @@ export default function RestaurantCard({
     distanceText,
     timeText,
     onReaction,
+    category,
 }) {
     const [showMap, setShowMap] = useState(false)
 
     const handleReaction = (reaction) => {
-        saveReaction({ name, reaction, imageSrc, mapLink })
+        saveReaction({ name, reaction, imageSrc, mapLink, category })
         if (typeof onReaction === 'function') {
             onReaction(reaction)
         }

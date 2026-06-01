@@ -33,7 +33,7 @@ export const setSearchRadius = (value) => {
     localStorage.setItem(STORAGE_KEYS.searchRadius, String(value))
 }
 
-export const saveReaction = ({ name, reaction, imageSrc, mapLink }) => {
+export const saveReaction = ({ name, reaction, imageSrc, mapLink, category }) => {
     if (!name || !reaction) {
         return
     }
@@ -43,7 +43,7 @@ export const saveReaction = ({ name, reaction, imageSrc, mapLink }) => {
     const existingIndex = next.findIndex((item) => item?.name === name)
     const payload =
         reaction === 'like'
-            ? { name, reaction, imageSrc, mapLink }
+            ? { name, reaction, imageSrc, mapLink, category }
             : { name, reaction }
 
     if (existingIndex >= 0) {

@@ -51,6 +51,26 @@ export default function TabSearch() {
     }
 
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ''
+    const categoryPriority = [
+        { name: 'Husman', types: ['scandinavian_restaurant'] },
+        { name: 'Pizza', types: ['pizza_restaurant'] },
+        { name: 'Hamburger', types: ['hamburger_restaurant'] },
+        { name: 'Asian', types: ['asian_restaurant'] },
+        { name: 'Pubs', types: ['bar'] },
+        { name: 'Spanish', types: ['spanish_restaurant'] },
+    ]
+
+    const getPrimaryCategory = (types = []) => {
+        if (!Array.isArray(types)) {
+            return ''
+        }
+
+        const match = categoryPriority.find((category) =>
+            category.types.some((type) => types.includes(type))
+        )
+
+        return match ? match.name : ''
+    }
 
     const formatDistance = (distanceMeters) => {
         if (!Number.isFinite(distanceMeters)) {
@@ -99,7 +119,7 @@ export default function TabSearch() {
                 headers: {
                     "Content-Type": "application/json",
                     "X-Goog-Api-Key": apiKey,
-                    "X-Goog-FieldMask": "places.displayName,places.photos,places.googleMapsUri,places.id,routingSummaries"
+                    "X-Goog-FieldMask": "places.displayName,places.photos,places.googleMapsUri,places.id,places.types,routingSummaries"
                 },
                 body: JSON.stringify({
                     "maxResultCount": 20,
@@ -167,6 +187,7 @@ export default function TabSearch() {
     const routingLeg = currentRestaurant?.routingSummary?.legs?.[0]
     const distanceText = formatDistance(routingLeg?.distanceMeters)
     const timeText = formatDuration(routingLeg?.duration)
+    const category = getPrimaryCategory(currentRestaurant?.types)
 
     return (
         <div className="tab-search">
@@ -193,6 +214,7 @@ export default function TabSearch() {
                         imageSrc={imgUrl}
                         mapLink={embeddedMapUrl}
                         mapLinkUri={currentRestaurant.googleMapsUri}
+                        category={category}
                         onReaction={handleReaction}
                     />
                 ) : (
