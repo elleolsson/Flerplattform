@@ -1,16 +1,63 @@
-# React + Vite
+# What Should We Eat?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+"What Should We Eat?" is a restaurant discovery web app. You can search for nearby restaurants by category and radius, view results on a map, and save favourites for later.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React
+- Vite
+- React-Bootstrap and Bootstrap
+- Google Places API and Google Maps
+- localStorage for favourites and reactions
 
-## React Compiler
+## Setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Run the setup script for your terminal. Make sure working directory is project root (``path-to/Flerplattform``). It installs dependencies and copies `.env.example` to `.env`.
 
-## Expanding the ESLint configuration
+PowerShell:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```powershell
+.\setup.ps1
+```
+
+Bash:
+
+```bash
+./setup.sh
+```
+
+After the script finishes, add your Google Maps API key to `.env`:
+
+```bash
+VITE_GOOGLE_MAPS_API_KEY=your_api_key_here
+```
+
+## Troubleshooting
+
+If your computer cannot run the setup scripts, run the commands directly instead.
+
+PowerShell:
+
+```powershell
+npm install
+copy .env.example .env
+```
+
+Bash:
+
+```bash
+npm install
+cp -f .env.example .env
+```
+
+## Run
+
+Start the development server with:
+
+```bash
+npm run dev
+```
+Open the localhost URL shown in your terminal, which is usually: 
+```
+http://localhost:5173/
+```
