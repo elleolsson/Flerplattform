@@ -18,3 +18,15 @@
     flex: 1;
     min-height: 0;
 }
+
+@media (min-width: 570px) {
+    .category-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .restaurant-cards {
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+    }
+}

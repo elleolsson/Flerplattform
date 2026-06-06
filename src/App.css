@@ -1,18 +1,43 @@
 .app-shell {
     display: flex;
     flex-direction: column;
-    max-width: 500px;
+    width: 100%;
+    max-width: 650px;
     margin: 0px auto;
     padding: 30px 15px;
     min-height: 100vh;
     background: #ffffff;
     border-radius: 20px;
     box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+    overflow: hidden;
 }
 
-.tabs {
+.app-nav {
+    padding: 0;
+    margin-bottom: 12px;
+}
+
+.app-nav-container {
+    padding: 0;
+}
+
+.app-nav-buttons {
     display: flex;
     gap: 12px;
-    justify-content: center;
-    padding-bottom: 10px;
+    width: 100%;
+}
+
+.app-nav-buttons>* {
+    flex-grow: 1;
+}
+
+@media (max-width: 570px) {
+    .app-nav-links {
+        flex-direction: column;
+        padding-top: 10px;
+    }
+
+    .app-nav-links>* {
+        width: 100%;
+    }
 }
